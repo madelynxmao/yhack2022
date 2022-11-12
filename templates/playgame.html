@@ -7,6 +7,19 @@
 {% block main %}
 
 
+<script>
+    function toggle_display(){
+        el = document.querySelector('hint');
+        
+        if (el.style.visibility == 'hidden')
+        {
+            el.style.visibility = 'visible'
+        }else{
+            el.style.visibility = 'hidden'
+  }
+}
+</script>
+
 <div class="mt-4 p-5 bg-light text-black rounded">
     <div class="container">
 
@@ -16,8 +29,14 @@
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="guess" name="guess" placeholder="Guess the City" type="text">
         </div>
 
-        <button>Give me another Hint</button>
-        <button>Submit</button>
+        <div class="hint">
+            This city is located in {{city_state}}
+        </div>
+
+        <button onclick= "toggle_display()">Give me a Hint</button>
+
+
+        <button type="submit">Submit</button>
 
         <div class="row align-items-start">
             <div class="col">
@@ -30,6 +49,5 @@
     </div>
 
     
-</div>
 </div>
 {% endblock %}
