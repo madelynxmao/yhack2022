@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 
 import requests
-
+import random
 
 # Configure application
 app = Flask(__name__)
@@ -35,7 +35,21 @@ def about():
 
 @app.route("/playgame",  methods=["GET", "POST"])
 def playgame():
-    return render_template('playgame.html')
+    with open("database.csv", 'r') as f:
+        n = f.readlines()
+
+    #print(n[0])
+    #print(n[1]) #first city
+
+    city_num = random.randint(1,100)
+    city =  n[city_num].strip().split(',')
+    city_name = city[1]
+    city_funfact = city[2]
+    city_state = city[3]
+    pop_2020 = city[7]
+    land_area_sqm = city[11]
+
+    return render_template('playgame.html', city_funfact = city_funfact, city_state = city_state, pop_2020 = pop_2020, land_area_sqm = land_area_sqm, city_name = city_name)
 
 
 
