@@ -9,14 +9,8 @@
 
 <script>
     function toggle_display(){
-        el = document.querySelector('hint');
-        
-        if (el.style.visibility == 'hidden')
-        {
-            el.style.visibility = 'visible'
-        }else{
-            el.style.visibility = 'hidden'
-  }
+        el = document.getElementById("hint");
+        el.style.visibility = "visible";
 }
 </script>
 
@@ -29,7 +23,7 @@
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="guess" name="guess" placeholder="Guess the City" type="text">
         </div>
 
-        <div class="hint">
+        <div style="visibility: hidden" id="hint">
             This city is located in {{city_state}}
         </div>
 
