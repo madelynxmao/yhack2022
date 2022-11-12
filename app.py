@@ -17,6 +17,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 city_name = ''
+streak = 0
 
 @app.after_request
 def after_request(response):
@@ -40,6 +41,7 @@ def playgame():
     with open("database.csv", 'r') as f:
         n = f.readlines()
     global city_name
+    global streak
 
     if request.method == 'GET':
         city_num = random.randint(1,100)
@@ -54,14 +56,17 @@ def playgame():
         return render_template('playgame.html', city_funfact = city_funfact, city_state = city_state, pop_2020 = pop_2020, land_area_sqm = land_area_sqm, city_name = city_name)
 
     elif request.method == 'POST':
+        print(streak)
         query = str(request.form.get("guess"))
-        print(query)
-        print(city_name)
+
 
         if query == city_name:
-            return render_template('congrats.html')
+            streak += 1
+            return render_template('congrats.html', streak = streak)
         else:
-            return render_template('wrong.html', city_name = city_name)
+            temp = streak
+            streak = 0
+            return render_template('wrong.html', city_name = city_name, streak = temp)
 
 
 
