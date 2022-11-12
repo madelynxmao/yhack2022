@@ -16,6 +16,8 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+city_name = ''
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -37,19 +39,31 @@ def about():
 def playgame():
     with open("database.csv", 'r') as f:
         n = f.readlines()
+    global city_name
 
-    #print(n[0])
-    #print(n[1]) #first city
+    if request.method == 'GET':
+        city_num = random.randint(1,100)
+        city =  n[city_num].strip().split(',')
 
-    city_num = random.randint(1,100)
-    city =  n[city_num].strip().split(',')
-    city_name = city[1]
-    city_funfact = city[2]
-    city_state = city[3]
-    pop_2020 = city[7]
-    land_area_sqm = city[11]
+        city_name = city[1]
+        city_funfact = city[2]
+        city_state = city[3]
+        pop_2020 = city[7]
+        land_area_sqm = city[11]
+        
+        return render_template('playgame.html', city_funfact = city_funfact, city_state = city_state, pop_2020 = pop_2020, land_area_sqm = land_area_sqm, city_name = city_name)
 
-    return render_template('playgame.html', city_funfact = city_funfact, city_state = city_state, pop_2020 = pop_2020, land_area_sqm = land_area_sqm, city_name = city_name)
+    elif request.method == 'POST':
+        query = str(request.form.get("guess"))
+        print(query)
+        print(city_name)
+
+        if query == city_name:
+            return render_template('congrats.html')
+        else:
+            return render_template('wrong.html')
+
+
 
 
 

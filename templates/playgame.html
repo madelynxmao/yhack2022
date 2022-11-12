@@ -29,10 +29,6 @@
 
         <br>
 
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="guess" name="guess" placeholder="Guess the City" type="text">
-        </div>
-
         <div style="visibility: hidden" id="state">
             This city is located in {{city_state}}
         </div>
@@ -44,17 +40,24 @@
         <div style="visibility: hidden" id="size">
             This city has a size of {{land_area_sqm}} square miles
         </div>
-
-        <br>
+        
 
         <button onclick= "toggle_display_state()">Tell me the state it's in</button>
 
         <button onclick= "toggle_display_pop()">Tell me the population</button>
 
         <button onclick= "toggle_display_size()">Tell me the size</button>
-        <br>
-        <br>
-        <button type="submit">Submit</button>
+
+
+        <form action="/playgame" method = "POST">
+            <p></p>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="guess" name="guess" placeholder="Guess the City" type="text">
+            </div>
+            <p><input type = "submit" value = "Submit" /></p>
+        </form>
+        
+
 
         <div class="row align-items-start">
             <div class="col">
