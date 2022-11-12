@@ -61,7 +61,7 @@ def playgame():
         if query == city_name:
             return render_template('congrats.html')
         else:
-            return render_template('wrong.html')
+            return render_template('wrong.html', city_name = city_name)
 
 
 
