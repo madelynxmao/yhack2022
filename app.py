@@ -33,6 +33,9 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route("/playgame",  methods=["GET", "POST"])
+def playgame():
+    return render_template('playgame.html')
 
 if __name__=="__main__":
     app.run(host=os.getenv('IP', '127.0.0.1'),
